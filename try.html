@@ -3,31 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple UI</title>
+    <title>Wallpaper Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-
-    <!-- Header with Search Bar -->
-    <header class="bg-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-center">
-            <input type="text" placeholder="Search for images..." 
-                   class="w-full md:w-1/2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+<body>
+    <div class="w-full bg-[url('https://i.pinimg.com/736x/57/76/8b/57768bc3aaec27c842e44e14b784fdbc.jpg')] object-cover bg-no-repeat h-[100vh] w-screen bg-center">
+        <div class="h-[8vh] w-full bg-[url('')] justify-center items-center flex">
+            <div class="justify-center items-center flex gap-2 w-full">
+                <div class="w-2/5"> 
+                    <input id="inputbar" type="text" placeholder="Theme" class="p-2 rounded-md border-2 block w-full text-center placeholder-black bg-[#F5EFFF] border-black">
+                </div>
+                <div>
+                    <img src="https://icon-library.com/images/search-icon-png-transparent/search-icon-png-transparent-9.jpg" onclick="search()" class="hover:point" height="30px" width="30px">
+                </div>
+            </div>
         </div>
-    </header>
-
-    <!-- Image Grid -->
-    <main class="container mx-auto py-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Placeholder images, replace with API-generated images -->
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
-            <div class="bg-gray-300 h-48 rounded-md shadow-md"></div>
+        
+        <div class="justify-center items-center w-full h-full px-40">
+            <div id="photosection" class="grid grid-cols-3 grid-rows-3 gap-4 w-full max-h-[92vh] pt-20 overflow-y-auto flex justify-center items-center m-5">
+            </div>
         </div>
-    </main>
+    </div>
 
+    <script>
+        document.getElementById('inputbar').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        });
+
+        async function search() {
+            const inputData = document.getElementById('inputbar').value;
+            const res = await fetch("https://wallpaper.acmsscbs.in/api/search?q=" + inputData);
+            const data = await res.json();
+            const main = document.getElementById("photosection");
+            main.innerHTML = "";
+            console.log(data);
+            for (var i = 0; i < data["wallpaper"].length; i++) {
+                var url = data.wallpaper[i].image;
+                var div = document.createElement("img");
+                div.setAttribute("src", url);
+                div.classList = ["w-[60vh]", "h-auto", "m-auto"];
+                main.appendChild(div);
+            }
+        }
+    </script>
 </body>
 </html>
