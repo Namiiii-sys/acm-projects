@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>project</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
+
 <body>
-    <div class="w-full bg-[#F4F6FF] h-[100vh]">
-        <div class="h-[8vh] flex bg-purple-300 justify-center items-center shadow-lg shadow-gray-500 ">
+    <div class="w-full bg-amber-100/50 min-h-[100vh]">
+        <div class="h-[10vh] flex bg-purple-300 justify-center items-center">
             <div class="justify-center items-center flex gap-2">
                 <div>
-                    <input type="text" id="inputbar" placeholder="Theme" class=" rounded-md border-2"/>
+                    <input type="text" id="inputbar" placeholder="Theme" class=" rounded-md border-2 px-2" />
                 </div>
                 <div>
                   <img src="search.png" onclick="search()" height="30px" width="30px">
@@ -20,7 +20,7 @@
                 
             </div>
         </div>
-        <div class="flex justify-center items-center px-80 h-full w-full">
+        <div class="flex justify-center items-center px-80 h-full w-full ">
             <div id="photoSection" class="grid grid-cols-3 gap-4 w-full overflow-y-auto pt-20 max-h-[92vh] flex justify-center items-center m-0">
 
 
@@ -39,7 +39,7 @@
                 var url = (data.wallpaper[i].image)
                 var div = document.createElement("img")
                 div.setAttribute('src',url)
-                div.classList = ['w-[20vh]','h-auto','m-auto']
+                div.classList = ['w-[20vh]','h-auto','m-auto','object-cover','aspect-video','hover:scale-110']
                 main.appendChild(div)
             }
         }
